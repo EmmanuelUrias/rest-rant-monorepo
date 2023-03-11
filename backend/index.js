@@ -11,7 +11,7 @@ app.use(cookieSession({
     name: 'session',
     sameSite: 'strict',
     keys: [process.env.SESSION_SECRET ],
-    maxAge: 10 * 60 * 1000 // 10 minutes
+    maxAge: 30 * 60 * 1000 // 30 minutes
 }))
 app.use(cors({
     origin: 'http://localhost:3000',
