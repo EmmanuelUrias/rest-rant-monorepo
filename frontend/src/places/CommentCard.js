@@ -1,5 +1,19 @@
+import { useContext } from "react";
+import { CurrentUser } from "../contexts/CurrentUser";
 
 function CommentCard({ comment, onDelete }) {
+    const { CurrentUser } = useContext(CurrentUser)
+ 
+    let deleteButton = null
+
+    if(CurrentUser?.userId === comment.authorId) {
+        deleteButton = (
+            <button className="btn btn-danger" onClick={onDelete}>
+                Delete Comment
+            </button>            
+        )
+        
+    }
     return (
         <div className="border col-sm-4">
             <h2 className="rant">{comment.rant ? 'Rant! 😡' : 'Rave! 😻'}</h2>
@@ -11,6 +25,7 @@ function CommentCard({ comment, onDelete }) {
             <button className="btn btn-danger" onClick={onDelete} >
                 Delete Comment
             </button>
+            
         </div>
     )
 }
