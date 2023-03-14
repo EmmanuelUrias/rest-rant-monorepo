@@ -5,6 +5,18 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
 
+    canAddPlace(){
+      return this.role === 'admin'
+    }
+
+    canEditPlace(){
+      return this.role === 'admin'
+    }
+
+    canDeletePlace(){
+      return this.role === 'admin'
+    }
+
     static associate({ Comment }) {
       User.hasMany(Comment, { as: 'author', foreignKey: 'author_id' })
     }
@@ -22,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     role: {
           type: DataTypes.ENUM,
-          value: [
+          values: [
             'reviewer', 
             'admin'
           ]

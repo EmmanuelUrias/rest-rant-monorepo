@@ -2,14 +2,14 @@ import { useContext } from "react";
 import { CurrentUser } from "../contexts/CurrentUser";
 
 function CommentCard({ comment, onDelete }) {
-    const { CurrentUser } = useContext(CurrentUser)
+    const currentUser = useContext(CurrentUser)
  
     let deleteButton = null
 
-    if(CurrentUser?.userId === comment.authorId) {
+    if(currentUser?.userId === comment.authorId) {
         deleteButton = (
             <button className="btn btn-danger" onClick={onDelete}>
-                Delete Comment
+                De
             </button>            
         )
         
@@ -25,7 +25,6 @@ function CommentCard({ comment, onDelete }) {
             <button className="btn btn-danger" onClick={onDelete} >
                 Delete Comment
             </button>
-            
         </div>
     )
 }
