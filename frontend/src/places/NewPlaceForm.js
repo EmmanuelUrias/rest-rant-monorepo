@@ -1,9 +1,10 @@
 import { useState } from "react"
-import { useHistory } from "react-router"
+import { useHistory, useLocation } from "react-router"
 
 function NewPlaceForm() {
 
 	const history = useHistory()
+	const location = useLocation()
 
 	const [place, setPlace] = useState({
 		name: '',
@@ -16,7 +17,7 @@ function NewPlaceForm() {
 	async function handleSubmit(e) {
 		e.preventDefault()
 
-		await fetch(`http://localhost:3007/places`, {
+		await fetch(`${location}/places`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

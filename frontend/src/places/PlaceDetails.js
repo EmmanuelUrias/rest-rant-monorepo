@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router"
+import { useHistory, useParams, useLocation } from "react-router"
 import CommentCard from './CommentCard'
 import NewCommentForm from "./NewCommentForm";
 
@@ -8,12 +8,13 @@ function PlaceDetails() {
 	const { placeId } = useParams()
 
 	const history = useHistory()
+	const location = useLocation()
 
 	const [place, setPlace] = useState(null)
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch(`http://localhost:3007/places/${placeId}`)
+			const response = await fetch(`${location}/places/${placeId}`)
 			const resData = await response.json()
 			setPlace(resData)
 		}
@@ -29,14 +30,14 @@ function PlaceDetails() {
 	}
 
 	async function deletePlace() {
-		await fetch(`http://localhost:3007/places/${place.placeId}`, {
+		await fetch(`${location}/places/${place.placeId}`, {
 			method: 'DELETE'
 		})
 		history.push('/places')
 	}
 
 	async function deleteComment(deletedComment) {
-		await fetch(`http://localhost:3007/places/${place.placeId}/comments/${deletedComment.commentId}`, {
+		await fetch(`${location}/places/${place.placeId}/comments/${deletedComment.commentId}`, {
 			method: 'DELETE'
 		})
 
@@ -48,7 +49,7 @@ function PlaceDetails() {
 	}
 
 	async function createComment(commentAttributes) {
-		const response = await fetch(`http://localhost:3007/places/${place.placeId}/comments`, {
+		const response = await fetch(`${location}/places/${place.placeId}/comments`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

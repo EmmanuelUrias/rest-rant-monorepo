@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 function PlaceIndex(data) {
 
 	const history = useHistory()
+	const location = useLocation()
 	
 	const [places, setPlaces] = useState([])
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch(`http://localhost:3007/places`)
+			const response = await fetch(`${location}/places`)
 			const resData = await response.json()
 			setPlaces(resData)
 		}

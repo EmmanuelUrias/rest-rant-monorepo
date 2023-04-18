@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
-import { useHistory, useParams } from "react-router"
+import { useHistory, useParams, useLocation } from "react-router"
 
 function SignUpForm() {
 
 	const history = useHistory()
+	const location = useLocation()
 
 	const [user, setUser] = useState({
 		firstName: '',
@@ -15,7 +16,7 @@ function SignUpForm() {
 	async function handleSubmit(e) {
 		e.preventDefault()
 
-		await fetch(`http://localhost:3007/users/`, {
+		await fetch(`${location}/users/`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

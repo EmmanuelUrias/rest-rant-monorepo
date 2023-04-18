@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
-import { useHistory } from "react-router"
+import { useHistory, useLocation } from "react-router"
 
 function NewCommentForm({ place, onSubmit }) {
+
+    const location = useLocation()
 
     const [authors, setAuthors] = useState([])
 
@@ -14,7 +16,7 @@ function NewCommentForm({ place, onSubmit }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`http://localhost:3007/users`)
+            const response = await fetch(`${location}/users`)
             const users = await response.json()
             setComment({ ...comment, authorId: users[0]?.userId})
             setAuthors(users)

@@ -1,10 +1,11 @@
 import { useContext, useState } from "react"
-import { useHistory } from "react-router"
+import { useHistory, useLocation } from "react-router"
 import { CurrentUser } from "../contexts/CurrentUser"
 
 function LoginForm() {
 
     const history = useHistory()
+    const location = useLocation()
 
     const { setCurrentUser } = useContext(CurrentUser)
 
@@ -17,7 +18,7 @@ function LoginForm() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        const res = await fetch('http://localhost:3007/authentication/', {
+        const res = await fetch(`${location}/authentication/`, {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json'

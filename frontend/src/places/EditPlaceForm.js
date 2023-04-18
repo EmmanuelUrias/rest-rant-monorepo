@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
-import { useHistory, useParams } from "react-router"
+import { useHistory, useParams, useLocation } from "react-router"
 
 function EditPlaceForm() {
 
 	const history = useHistory()
+	const location = useLocation()
 
     const { placeId } = useParams()
 
@@ -17,7 +18,7 @@ function EditPlaceForm() {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await fetch(`http://localhost:3007/places/${placeId}`)
+			const response = await fetch(`${location}/places/${placeId}`)
 			const resData = await response.json()
 			setPlace(resData)
 		}
@@ -27,7 +28,7 @@ function EditPlaceForm() {
 	async function handleSubmit(e) {
 		e.preventDefault()
 
-		await fetch(`http://localhost:5000/places/${place.placeId}`, {
+		await fetch(`${location}/places/${place.placeId}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json'
